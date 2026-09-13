@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  
+  /* Ensure all borders are thick and black by default where applicable */
+  * {
+    border-color: theme('colors.border');
+  }
+}
+
+/* Hide scrollbar for cleaner look or customize it */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-background border-l-2 border-black;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary border-2 border-black;
+}
