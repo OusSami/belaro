@@ -1,72 +1,83 @@
 "use client";
 
-import Link from "next/link";
-import { ShoppingBag, Menu } from "lucide-react";
 import { useState } from "react";
-import { SITE_NAME, NAV_LINKS } from "@/lib/constants";
+import Link from "next/link";
+import { ShoppingCart, Menu, X } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { NAV_LINKS } from "@/lib/constants";
+import { Logo } from "@/components/ui/Logo";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
-  const [open, setOpen] = useState(false);
   const { state } = useCart();
-  const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0);
+  const itemCount = state.items.reduce((acc, item) => acc + item.quantity, 0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b-2 border-primary bg-background">
-      <div className="container mx-auto flex h-full items-center justify-between px-4">
-        <Link href="/" className="text-2xl font-black uppercase tracking-tighter">
-          {SITE_NAME}
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-black uppercase tracking-wide hover:text-accent transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <Link
-            href="/cart"
-            className="relative flex h-10 w-10 items-center justify-center border-2 border-primary shadow-hard hover:-translate-y-0.5 hover:shadow-hard-lg transition-all"
-            aria-label="Cart"
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b-2 border-primary">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+        
+        {/* Left Side: Mobile Menu Toggle & Logo */}
+        <div className="flex items-center gap-4 md:gap-10">
+          <button 
+            className="md:hidden flex items-center justify-center p-2 -ml-2 text-primary hover:text-accent transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <ShoppingBag className="h-5 w-5" />
+            {mobileMenuOpen ? <X className="h-7 w-7 stroke-[2.5]" /> : <Menu className="h-7 w-7 stroke-[2.5]" />}
+          </button>
+          
+          <Link href="/" className="flex items-center hover:text-accent transition-colors" onClick={() => setMobileMenuOpen(false)}>
+            <Logo />
+          </Link>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex gap-8">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`flex items-center text-sm font-bold uppercase tracking-wider transition-colors hover:text-accent ${
+                  pathname === link.href ? "text-accent" : "text-primary"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        {/* Right Side: Cart */}
+        <div className="flex items-center">
+          <Link href="/cart" className="relative p-2 border-l-2 border-primary h-16 flex items-center justify-center w-16 hover:bg-accent transition-colors group">
+            <ShoppingCart className="h-6 w-6 stroke-[2.5] group-hover:text-primary" />
             {itemCount > 0 && (
-              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-black text-primary border-2 border-primary">
+              <span className="absolute top-3 right-2 h-5 w-5 bg-primary text-white text-[11px] font-bold flex items-center justify-center rounded-full group-hover:bg-white group-hover:text-primary group-hover:border-2 group-hover:border-primary">
                 {itemCount}
               </span>
             )}
+            <span className="sr-only">Cart</span>
           </Link>
-
-          <button
-            className="md:hidden flex h-10 w-10 items-center justify-center border-2 border-primary shadow-hard"
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
         </div>
       </div>
 
-      {open && (
-        <nav className="md:hidden border-t-2 border-primary bg-background px-4 py-4 flex flex-col gap-4">
+      {/* Mobile Navigation Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b-2 border-primary shadow-hard flex flex-col items-center py-6 gap-6 z-40">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-black uppercase tracking-wide"
-              onClick={() => setOpen(false)}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`text-2xl font-black uppercase tracking-wider transition-colors hover:text-accent ${
+                pathname === link.href ? "text-accent" : "text-primary"
+              }`}
             >
               {link.name}
             </Link>
           ))}
-        </nav>
+          <div className="w-16 h-1 bg-primary mt-2"></div>
+        </div>
       )}
     </header>
   );

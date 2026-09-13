@@ -1,55 +1,39 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
-type ButtonVariant = "default" | "accent" | "outline" | "ghost";
-type ButtonSize = "sm" | "default" | "lg";
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "default" | "outline" | "accent" | "ghost";
+  size?: "default" | "sm" | "lg" | "icon";
   asChild?: boolean;
 }
 
-const variantClasses: Record<ButtonVariant, string> = {
-  default: "bg-primary text-primary-foreground hover:bg-primary/90",
-  accent: "bg-accent text-primary hover:bg-accent/90",
-  outline: "bg-card text-primary hover:bg-muted",
-  ghost: "bg-transparent border-transparent shadow-none hover:bg-muted",
-};
-
-const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-10 px-4 text-sm",
-  default: "h-12 px-6 text-base",
-  lg: "h-14 px-8 text-lg",
-};
-
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", asChild = false, children, ...props }, ref) => {
-    const classes = cn(
-      "inline-flex items-center justify-center whitespace-nowrap font-black uppercase tracking-tight",
-      "border-2 border-primary shadow-hard transition-all",
-      "hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-y-0 active:shadow-none",
-      "disabled:pointer-events-none disabled:opacity-50",
-      variantClasses[variant],
-      sizeClasses[size],
-      className
-    );
-
-    if (asChild && React.isValidElement(children)) {
-      const child = children as React.ReactElement<{ className?: string }>;
-      return React.cloneElement(child, {
-        className: cn(classes, child.props.className),
-      });
-    }
-
+  ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
+    const Comp = asChild ? "div" : "button";
     return (
-      <button className={classes} ref={ref} {...props}>
-        {children}
-      </button>
-    );
+      // @ts-ignore
+      <Comp
+        ref={ref as any}
+        className={cn(
+          "inline-flex items-center justify-center whitespace-nowrap text-base font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50",
+          "border-2 border-primary rounded-none shadow-hard active:translate-x-[4px] active:translate-y-[4px] active:shadow-none hover:-translate-y-1 hover:shadow-hard-lg",
+          {
+            "bg-primary text-primary-foreground": variant === "default",
+            "bg-accent text-primary": variant === "accent",
+            "bg-card text-primary": variant === "outline",
+            "border-transparent shadow-none hover:shadow-none active:translate-x-0 active:translate-y-0 hover:bg-muted text-primary": variant === "ghost",
+            "h-12 px-6 py-2": size === "default",
+            "h-10 px-4 text-sm": size === "sm",
+            "h-14 px-10 text-lg": size === "lg",
+            "h-12 w-12": size === "icon",
+          },
+          className
+        )}
+        {...props}
+      />
+    )
   }
-);
-Button.displayName = "Button";
+)
+Button.displayName = "Button"
 
-export { Button };
+export { Button }
