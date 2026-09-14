@@ -1,7 +1,7 @@
 export const SITE_NAME = "Belaro";
 export const COMPANY_NAME = "Belaro LLC";
 export const COMPANY_ADDRESS = "539 W. Commerce St #4763, Dallas, TX 75208";
-export const COMPANY_EMAIL = "contact@belaro.com";
+export const COMPANY_EMAIL = "support@belaro.online";
 export const COMPANY_PHONE = "+1 8172543757";
 
 export const SITE_DESCRIPTION = "High-quality digital design assets for modern creators.";
