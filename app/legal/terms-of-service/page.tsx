@@ -19,7 +19,7 @@ export default function TermsOfService() {
       <p>We reserve the right to refuse any order you place with us. You agree to provide current, complete and accurate purchase and account information for all purchases made at our store.</p>
       
       <h2>5. Governing Law</h2>
-      <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of the State of Wyoming and Texas, United States.</p>
+      <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of the State of Wyoming, United States.</p>
 
       <h2>6. Contact Information</h2>
       <p>Questions about the Terms of Service should be sent to us at {COMPANY_EMAIL}.</p>
