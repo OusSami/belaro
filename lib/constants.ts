@@ -10,6 +10,7 @@ export const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Products", href: "/products" },
   { name: "Categories", href: "/categories" },
+  { name: "About", href: "/about" },
 ];
 
 export const FOOTER_LINKS = {
