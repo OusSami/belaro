@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { ProductCard } from "@/components/products/ProductCard";
 import { MOCK_PRODUCTS, CATEGORIES } from "@/lib/products";
-import { ArrowRight, Box, Layers, Zap } from "lucide-react";
+import { COMPANY_NAME, COMPANY_ADDRESS, COMPANY_EMAIL, COMPANY_PHONE } from "@/lib/constants";
+import { ArrowRight, Box, Layers, Mail, MapPin, Phone, Zap } from "lucide-react";
 
 export default function Home() {
   const featuredProducts = MOCK_PRODUCTS.slice(0, 3);
@@ -123,7 +124,7 @@ export default function Home() {
       </section>
       
       {/* Newsletter */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-32">
         <div className="bg-accent border-2 border-primary shadow-hard p-8 md:p-16 text-center relative">
           <div className="absolute -top-10 left-10 text-primary font-handwriting text-5xl -rotate-12 hidden md:block">
             Don't miss out!
@@ -143,6 +144,103 @@ export default function Home() {
               Subscribe
             </Button>
           </form>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="container mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24 relative">
+        <div className="absolute -top-14 left-10 text-accent-secondary font-handwriting text-5xl -rotate-6 hidden md:block">
+          Say hello!
+        </div>
+        <div className="flex items-end justify-between mb-12 border-b-4 border-primary pb-4">
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter">Get in Touch</h2>
+          <Link href="/contact" className="hidden sm:flex items-center text-xl font-bold hover:text-accent transition-colors">
+            Contact page <ArrowRight className="ml-2 h-6 w-6 stroke-[3]" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 border-2 border-primary shadow-hard bg-card">
+          {/* Company Info */}
+          <div className="p-8 md:p-12 border-b-2 md:border-b-0 md:border-r-2 border-primary">
+            <h3 className="text-2xl font-black uppercase mb-8 border-b-2 border-primary pb-4">Company Details</h3>
+
+            <div className="space-y-6 font-bold">
+              <div className="flex items-start gap-4">
+                <MapPin className="h-6 w-6 mt-1 text-accent shrink-0" />
+                <div>
+                  <p className="mb-1 text-primary/70 uppercase text-sm tracking-wider">Address</p>
+                  <p>{COMPANY_NAME}</p>
+                  <p>{COMPANY_ADDRESS}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Mail className="h-6 w-6 mt-1 text-accent shrink-0" />
+                <div>
+                  <p className="mb-1 text-primary/70 uppercase text-sm tracking-wider">Email</p>
+                  <a href={`mailto:${COMPANY_EMAIL}`} className="hover:text-accent transition-colors underline decoration-2 underline-offset-4 break-all">
+                    {COMPANY_EMAIL}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Phone className="h-6 w-6 mt-1 text-accent shrink-0" />
+                <div>
+                  <p className="mb-1 text-primary/70 uppercase text-sm tracking-wider">Phone</p>
+                  <a href={`tel:${COMPANY_PHONE.replace(/\s/g, "")}`} className="hover:text-accent transition-colors underline decoration-2 underline-offset-4">
+                    {COMPANY_PHONE}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="p-8 md:p-12">
+            <h3 className="text-2xl font-black uppercase mb-8 border-b-2 border-primary pb-4">Send a Message</h3>
+
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="contact-name" className="block text-sm font-black uppercase tracking-wider mb-2">Name</label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  autoComplete="name"
+                  className="w-full h-12 border-2 border-primary bg-background px-4 font-bold focus:outline-none focus:ring-4 focus:ring-accent/20"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-email" className="block text-sm font-black uppercase tracking-wider mb-2">Email</label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  autoComplete="email"
+                  className="w-full h-12 border-2 border-primary bg-background px-4 font-bold focus:outline-none focus:ring-4 focus:ring-accent/20"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-message" className="block text-sm font-black uppercase tracking-wider mb-2">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  className="w-full border-2 border-primary bg-background p-4 font-bold focus:outline-none focus:ring-4 focus:ring-accent/20 resize-none"
+                  required
+                ></textarea>
+              </div>
+
+              <Button type="submit" size="lg" className="w-full">
+                Send Message
+              </Button>
+            </form>
+          </div>
         </div>
       </section>
     </div>

@@ -14,6 +14,12 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // The contact section lives on the homepage; use a bare hash when already there.
+  const navLinks = [
+    ...NAV_LINKS,
+    { name: "Contact", href: pathname === "/" ? "#contact" : "/#contact" },
+  ];
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b-2 border-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
@@ -33,7 +39,7 @@ export function Navbar() {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -64,7 +70,7 @@ export function Navbar() {
       {/* Mobile Navigation Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b-2 border-primary shadow-hard flex flex-col items-center py-6 gap-6 z-40">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
