@@ -5,7 +5,7 @@ export default function CookiePolicy() {
   return (
     <LegalLayout
       title="Cookie Policy"
-      lastUpdated={new Date().toLocaleDateString()}
+      lastUpdated="September 12, 2026"
       intro={`This Cookie Policy explains how ${COMPANY_NAME} ("we", "us", and "ours") uses cookies and similar technologies to recognize you when you visit our website.`}
     >
       <LegalSection title="What are cookies?">

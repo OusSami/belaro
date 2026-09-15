@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
   return (
     <LegalLayout
       title="Privacy Policy"
-      lastUpdated={new Date().toLocaleDateString()}
+      lastUpdated="September 12, 2026"
       intro={`This Privacy Policy describes how ${COMPANY_NAME} ("we", "us", or "our") collects, uses, and shares your personal information when you visit or make a purchase from our website.`}
     >
       <LegalSection title="1. Personal Information We Collect">

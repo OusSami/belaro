@@ -3,7 +3,7 @@ import { COMPANY_NAME, COMPANY_EMAIL } from "@/lib/constants";
 
 export default function RefundPolicy() {
   return (
-    <LegalLayout title="Refund Policy" lastUpdated={new Date().toLocaleDateString()}>
+    <LegalLayout title="Refund Policy" lastUpdated="September 12, 2026">
       <LegalSection title="Digital Products">
         <p>Due to the nature of digital products, which are non-tangible and irrevocable goods, <strong>all sales are final</strong>. We do not issue refunds for digital products once the order is confirmed and the product is sent or downloaded.</p>
         <p>By purchasing from {COMPANY_NAME}, you agree and acknowledge that you are purchasing a digital good that cannot be physically returned, and thus no refunds will be provided.</p>

@@ -5,6 +5,7 @@ export default function License() {
   return (
     <LegalLayout
       title="License Agreement"
+      lastUpdated="September 12, 2026"
       intro={`By purchasing and downloading assets from ${COMPANY_NAME}, you agree to the following license terms:`}
     >
       <LegalSection title="Standard Commercial License">

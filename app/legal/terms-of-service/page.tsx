@@ -3,7 +3,7 @@ import { COMPANY_NAME, COMPANY_ADDRESS, COMPANY_EMAIL } from "@/lib/constants";
 
 export default function TermsOfService() {
   return (
-    <LegalLayout title="Terms of Service" lastUpdated={new Date().toLocaleDateString()}>
+    <LegalLayout title="Terms of Service" lastUpdated="September 12, 2026">
       <LegalSection title="1. Overview">
         <p>This website is operated by {COMPANY_NAME}. Throughout the site, the terms “we”, “us” and “our” refer to {COMPANY_NAME}. We offer this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p>
       </LegalSection>

@@ -16,7 +16,7 @@ export function LegalLayout({ title, lastUpdated, intro, children }: LegalLayout
           <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-4">{title}</h1>
           {lastUpdated && (
             <span className="inline-block bg-accent border-2 border-primary shadow-hard px-4 py-1.5 text-sm font-black uppercase tracking-wider text-primary">
-              Last updated: {lastUpdated}
+              Effective Date: {lastUpdated}
             </span>
           )}
           {intro && (
